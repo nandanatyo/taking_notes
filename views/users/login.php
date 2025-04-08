@@ -1,5 +1,5 @@
 <?php
-// views/users/login.php
+
 $title = "Login";
 ob_start();
 ?>

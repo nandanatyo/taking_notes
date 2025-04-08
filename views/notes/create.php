@@ -1,5 +1,5 @@
 <?php
-// views/notes/create.php
+
 $title = "Buat Catatan Baru";
 ob_start();
 ?>

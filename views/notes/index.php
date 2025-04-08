@@ -1,5 +1,5 @@
 <?php
-// views/notes/index.php
+
 $title = "Catatan Saya";
 ob_start();
 ?>

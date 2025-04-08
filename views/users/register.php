@@ -1,5 +1,5 @@
 <?php
-// views/users/register.php
+
 $title = "Register";
 ob_start();
 ?>

@@ -1,5 +1,5 @@
 <?php
-// models/Note.php
+
 class Note {
     private $conn;
     private $table_name = "notes";
@@ -15,19 +15,19 @@ class Note {
         $this->conn = $db;
     }
 
-    // Create a new note
+
     public function create() {
         $query = "INSERT INTO " . $this->table_name . " (title, content, user_id, created_at)
                  VALUES (:title, :content, :user_id, :created_at)";
 
         $stmt = $this->conn->prepare($query);
 
-        // Sanitize inputs
+
         $this->title = htmlspecialchars(strip_tags($this->title));
         $this->content = htmlspecialchars(strip_tags($this->content));
         $this->user_id = htmlspecialchars(strip_tags($this->user_id));
 
-        // Bind values
+
         $stmt->bindParam(":title", $this->title);
         $stmt->bindParam(":content", $this->content);
         $stmt->bindParam(":user_id", $this->user_id);
@@ -39,7 +39,7 @@ class Note {
         return false;
     }
 
-    // Read all notes
+
     public function readAll() {
         $query = "SELECT * FROM " . $this->table_name . " ORDER BY created_at DESC";
         $stmt = $this->conn->prepare($query);
@@ -47,7 +47,7 @@ class Note {
         return $stmt;
     }
 
-    // Read user's notes
+
     public function readUserNotes($user_id) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE user_id = ? ORDER BY created_at DESC";
         $stmt = $this->conn->prepare($query);
@@ -56,7 +56,7 @@ class Note {
         return $stmt;
     }
 
-    // Read one note
+
     public function readOne() {
         $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? LIMIT 1";
         $stmt = $this->conn->prepare($query);
@@ -76,7 +76,7 @@ class Note {
         return false;
     }
 
-    // Update a note
+
     public function update() {
         $query = "UPDATE " . $this->table_name . "
                 SET title = :title, content = :content, updated_at = :updated_at
@@ -84,12 +84,12 @@ class Note {
 
         $stmt = $this->conn->prepare($query);
 
-        // Sanitize inputs
+
         $this->title = htmlspecialchars(strip_tags($this->title));
         $this->content = htmlspecialchars(strip_tags($this->content));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
-        // Bind values
+
         $stmt->bindParam(":title", $this->title);
         $stmt->bindParam(":content", $this->content);
         $stmt->bindParam(":updated_at", date('Y-m-d H:i:s'));
@@ -101,7 +101,7 @@ class Note {
         return false;
     }
 
-    // Delete a note
+
     public function delete() {
         $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($query);

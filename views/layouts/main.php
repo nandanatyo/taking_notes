@@ -1,5 +1,5 @@
 <?php
-// views/layouts/main.php
+
 ?>
 <!DOCTYPE html>
 <html lang="id">

@@ -1,7 +1,7 @@
 <?php
-// routes.php
+
 function route($action, $id = null) {
-    // Note Routes
+
     if ($action === 'notes') {
         $controller = new NoteController();
         $controller->index();
@@ -31,7 +31,7 @@ function route($action, $id = null) {
         $controller->delete($id);
     }
 
-    // User Routes
+
     else if ($action === 'login') {
         $controller = new UserController();
         $controller->login();
@@ -53,7 +53,7 @@ function route($action, $id = null) {
         $controller->logout();
     }
 
-    // Default Route
+
     else {
         $controller = new UserController();
         $controller->login();

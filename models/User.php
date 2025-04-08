@@ -1,5 +1,5 @@
 <?php
-// models/User.php
+
 class User {
     private $conn;
     private $table_name = "users";
@@ -14,19 +14,19 @@ class User {
         $this->conn = $db;
     }
 
-    // Create a new user
+
     public function create() {
         $query = "INSERT INTO " . $this->table_name . " (username, password, email, created_at)
                  VALUES (:username, :password, :email, :created_at)";
 
         $stmt = $this->conn->prepare($query);
 
-        // Sanitize inputs
+
         $this->username = htmlspecialchars(strip_tags($this->username));
         $this->email = htmlspecialchars(strip_tags($this->email));
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
 
-        // Bind values
+
         $stmt->bindParam(":username", $this->username);
         $stmt->bindParam(":password", $this->password);
         $stmt->bindParam(":email", $this->email);
@@ -38,7 +38,7 @@ class User {
         return false;
     }
 
-    // Check if user exists and verify password
+
     public function login() {
         $query = "SELECT id, username, password FROM " . $this->table_name . " WHERE username = ? LIMIT 1";
         $stmt = $this->conn->prepare($query);
@@ -49,7 +49,7 @@ class User {
 
         if($row) {
             $this->id = $row['id'];
-            // Verify password
+
             if(password_verify($this->password, $row['password'])) {
                 return true;
             }
@@ -57,7 +57,7 @@ class User {
         return false;
     }
 
-    // Check if username exists
+
     public function isUsernameExists() {
         $query = "SELECT id FROM " . $this->table_name . " WHERE username = ? LIMIT 1";
         $stmt = $this->conn->prepare($query);

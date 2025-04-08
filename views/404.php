@@ -1,5 +1,5 @@
 <?php
-// views/404.php
+
 $title = "Halaman Tidak Ditemukan";
 ob_start();
 ?>

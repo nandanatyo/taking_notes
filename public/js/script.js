@@ -1,6 +1,4 @@
-// public/js/script.js
 document.addEventListener("DOMContentLoaded", function () {
-  // Fade out alert messages after 3 seconds
   const alerts = document.querySelectorAll(".alert");
   if (alerts.length > 0) {
     setTimeout(function () {

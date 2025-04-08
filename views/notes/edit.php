@@ -1,5 +1,5 @@
 <?php
-// views/notes/edit.php
+
 $title = "Edit Catatan";
 ob_start();
 ?>

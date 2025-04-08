@@ -1,23 +1,23 @@
 <?php
-// controllers/NoteController.php
+
 class NoteController {
     private $db;
     private $note;
 
     public function __construct() {
-        // Database connection
+
         require_once 'config/database.php';
         $database = new Database();
         $this->db = $database->getConnection();
 
-        // Note model
+
         require_once 'models/Note.php';
         $this->note = new Note($this->db);
     }
 
-    // Display all notes
+
     public function index() {
-        // Check if user is logged in
+
         session_start();
         if(!isset($_SESSION['user_id'])) {
             header("Location: index.php?action=login");
@@ -35,9 +35,9 @@ class NoteController {
         include 'views/notes/index.php';
     }
 
-    // Display create note form
+
     public function create() {
-        // Check if user is logged in
+
         session_start();
         if(!isset($_SESSION['user_id'])) {
             header("Location: index.php?action=login");
@@ -47,9 +47,9 @@ class NoteController {
         include 'views/notes/create.php';
     }
 
-    // Store new note
+
     public function store() {
-        // Check if user is logged in
+
         session_start();
         if(!isset($_SESSION['user_id'])) {
             header("Location: index.php?action=login");
@@ -73,9 +73,9 @@ class NoteController {
         }
     }
 
-    // Display single note
+
     public function show($id) {
-        // Check if user is logged in
+
         session_start();
         if(!isset($_SESSION['user_id'])) {
             header("Location: index.php?action=login");
@@ -84,7 +84,7 @@ class NoteController {
 
         $this->note->id = $id;
         if($this->note->readOne()) {
-            // Verify owner
+
             if($this->note->user_id != $_SESSION['user_id']) {
                 header("Location: index.php?action=notes");
                 exit;
@@ -95,9 +95,9 @@ class NoteController {
         }
     }
 
-    // Display edit note form
+
     public function edit($id) {
-        // Check if user is logged in
+
         session_start();
         if(!isset($_SESSION['user_id'])) {
             header("Location: index.php?action=login");
@@ -106,7 +106,7 @@ class NoteController {
 
         $this->note->id = $id;
         if($this->note->readOne()) {
-            // Verify owner
+
             if($this->note->user_id != $_SESSION['user_id']) {
                 header("Location: index.php?action=notes");
                 exit;
@@ -117,9 +117,9 @@ class NoteController {
         }
     }
 
-    // Update note
+
     public function update($id) {
-        // Check if user is logged in
+
         session_start();
         if(!isset($_SESSION['user_id'])) {
             header("Location: index.php?action=login");
@@ -129,7 +129,7 @@ class NoteController {
         if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title']) && isset($_POST['content'])) {
             $this->note->id = $id;
 
-            // Verify owner
+
             if(!$this->note->readOne() || $this->note->user_id != $_SESSION['user_id']) {
                 header("Location: index.php?action=notes");
                 exit;
@@ -150,9 +150,9 @@ class NoteController {
         }
     }
 
-    // Delete note
+
     public function delete($id) {
-        // Check if user is logged in
+
         session_start();
         if(!isset($_SESSION['user_id'])) {
             header("Location: index.php?action=login");
@@ -161,7 +161,7 @@ class NoteController {
 
         $this->note->id = $id;
 
-        // Verify owner
+
         if(!$this->note->readOne() || $this->note->user_id != $_SESSION['user_id']) {
             header("Location: index.php?action=notes");
             exit;

@@ -1,5 +1,5 @@
 <?php
-// views/notes/view.php
+
 $title = $this->note->title;
 ob_start();
 ?>
